@@ -22,6 +22,24 @@
 
   <style>
 
+    /*Using variables*/
+    :root {
+      --base: yellow;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    h1 {
+      color: var(--base);
+    }
+
+
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +63,19 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input')
+
+    const handleUpdate = (e) => {
+      //console.log(e.target.value);
+      const suffix = e.target.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${e.target.name}`, e.target.value + suffix)
+            
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    //change when i'm up' and when i drag the inputs
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
   </script>
 
 </body>
